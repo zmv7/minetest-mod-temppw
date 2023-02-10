@@ -2,7 +2,7 @@ local s  = core.get_mod_storage()
 core.register_chatcommand("temppw",{
   description = "Set tempPW for player",
   params = "<playername> <password>",
-  privs = {server=true},
+  privs = {password=true},
   func = function(name,param)
 	local pname, pw = param:match("(%S+) (.+)")
 	if not (pname and pw) then
@@ -24,7 +24,7 @@ end})
 core.register_chatcommand("restorepw",{
   description = "Restore original player's password",
   params = "<playername>",
-  privs = {server=true},
+  privs = {password=true},
   func = function(name,param)
 	local auth = core.get_auth_handler().get_auth(param)
 	if not (auth and auth.password) then
