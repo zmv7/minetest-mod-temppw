@@ -1,4 +1,4 @@
-local s  = core.get_mod_storage()
+local s = core.get_mod_storage()
 core.register_chatcommand("temppw",{
   description = "Set tempPW for player",
   params = "<playername> <password>",
@@ -37,4 +37,16 @@ core.register_chatcommand("restorepw",{
 	core.set_player_password(param, orig_hash)
 	s:set_string(param,"")
 	return true, "Password of "..param.." restored"
+end})
+core.register_chatcommand("temppws",{
+  description = "Show players with setted TempPW",
+  privs = {password=true},
+  func = function(name,param)
+	local out = {}
+	local s_table = s:to_table().fields
+	for nick,val in pairs(s_table) do
+		table.insert(out,nick)
+	end
+	table.sort(out)
+	return true, "Players with TempPW: "..table.concat(out,", ")
 end})
